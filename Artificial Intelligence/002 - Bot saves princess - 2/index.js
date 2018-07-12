@@ -5,34 +5,39 @@ function processData(input) {
     var rows = parseInt(rc[0]);
     var columns = parseInt(rc[1]);
     var grid = [];
-    for(var i = 2; i <= dimension+1; ++i)
-    {
+    for (var i = 2; i <= dimension + 1; ++i) {
         grid.push(lines[i]);
     }
     nextMove(dimension, rows, columns, grid);
 }
 
-function nextMove(n, r, c, grid){
+function nextMove(n, r, c, grid) {
     //console.log(grid);
     let dimension = n;
-    let botPosition = {Row: r, Column: c}
-    let princessPosition = {X: 0, Y: 0};
+    let botPosition = {
+        Row: r,
+        Column: c
+    }
+    let princessPosition = {
+        X: 0,
+        Y: 0
+    };
     for (let row = 0; row < dimension; row++) {
         for (let column = 0; column < dimension; column++) {
             //console.log(`Procesando ${row} y ${column}: ${grid[row][column]}`)
             if (grid[row][column] == 'p') {
                 princessPosition.Row = row;
                 princessPosition.Column = column;
-            } 
+            }
         }
     }
-    if(botPosition.Row > princessPosition.Row) {
+    if (botPosition.Row > princessPosition.Row) {
         process.stdout.write('UP' + '\n');
-    } else if(botPosition.Row < princessPosition.Row) {
+    } else if (botPosition.Row < princessPosition.Row) {
         process.stdout.write('DOWN' + '\n');
-    } else if(botPosition.Column > princessPosition.Column) {
+    } else if (botPosition.Column > princessPosition.Column) {
         process.stdout.write('LEFT' + '\n');
-    } else if(botPosition.Column < princessPosition.Column) {
+    } else if (botPosition.Column < princessPosition.Column) {
         process.stdout.write('RIGHT' + '\n');
     }
 }
@@ -45,5 +50,5 @@ process.stdin.on("data", function (input) {
 });
 
 process.stdin.on("end", function () {
-   processData(_input);
+    processData(_input);
 });
